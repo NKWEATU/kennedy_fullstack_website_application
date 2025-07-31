@@ -1,0 +1,79 @@
+/* Hero Section with Blue Gradient */
+.hero {
+  background: linear-gradient(135deg, #001f3f, #0074D9, #00c6ff);
+  padding: 80px 20px;
+}
+
+.hero h1,
+.hero p {
+  color: black;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUpText 1s forwards;
+}
+
+.hero h1 {
+  animation-delay: 0.3s;
+}
+
+.hero p {
+  animation-delay: 0.6s;
+}
+
+@keyframes fadeUpText {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Courses Section */
+.courses {
+  background: #ffffff;
+  padding: 60px 20px;
+}
+
+/* Course Card Styles */
+.course-card {
+  background: linear-gradient(135deg, #f0f0f0, #e6f7ff);
+  border: 1px solid #dbe9f4;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #000;
+}
+
+.course-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation Classes */
+.animate {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s forwards;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.floating-text {
+  display: inline-block;
+  animation: floatText 4s ease-in-out infinite;
+  color: white;
+  font-weight: bold;
+}
+
+@keyframes floatText {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
