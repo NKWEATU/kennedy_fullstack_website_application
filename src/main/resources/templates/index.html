@@ -1,38 +1,139 @@
 <!DOCTYPE html>
-<html lang="en"
-            xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Registration and Login System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-          crossorigin="anonymous">
+    <title>NKC-Tech Academy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        .floating-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: floatSideways 6s linear infinite alternate;
+            color: white;
+            font-weight: bold;
+        }
+
+        @keyframes floatSideways {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(40px); }
+        }
+
+        .hero {
+            background: url('/images/background1.jpeg') no-repeat center center;
+            background-size: cover;
+            color: white;
+        }
+
+        .hero .container {
+            background-color: rgba(0, 0, 0, 0.75);
+            padding: 3rem;
+            border-radius: 10px;
+        }
+
+        .course-card {
+            border: 1px solid #ccc;
+            transition: transform 0.3s ease-in-out;
+            border-radius: 10px;
+        }
+
+        .course-card:hover {
+            transform: scale(1.05);
+        }
+
+        .animate {
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- Header Hero Section -->
+<header class="hero text-center py-5">
+    <div class="container bg-dark bg-opacity-75 p-4 rounded">
+        <h1 class="display-4 fw-bold text-white">NKC-Tech Academy</h1>
+        <p class="lead fw-bold text-white">Learn Mobile, Web, Desktop & Machine Learning Development</p>
+        <a th:href="@{/register}" class="btn btn-light btn-lg mt-3 fw-bold">Get Started</a>
+    </div>
+</header>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/index}">Registration and Login System</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand floating-text" th:href="@{/index}">
+            NKC-TECH...Your dreams will always come true
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/register}">Register</a>
+                    <a class="nav-link" th:href="@{/register}">Register</a>
                 </li>
-
             </ul>
-
         </div>
     </div>
 </nav>
-<br /><br />
-<div class="container">
-    <div class="row">
-        <h1 class="text-center">Registration and Login System</h1>
+
+<!-- Courses Section with Background -->
+<section class="courses py-5 text-white" id="courses" style="background: url('/images/background.jpeg') no-repeat center center/cover;">
+    <div class="container">
+        <h2 class="text-center mb-4">Our Courses</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card course-card animate bg-dark text-white">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">📱 Mobile Apps</h5>
+                        <p class="card-text">Flutter, React Native, Java for Android.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card course-card animate delay-1 bg-dark text-white">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">💻 Web Apps</h5>
+                        <p class="card-text">HTML, CSS, JS, Spring Boot & React.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card course-card animate delay-2 bg-dark text-white">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">🖥️ Desktop Apps</h5>
+                        <p class="card-text">JavaFX, Electron, Python Tkinter.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card course-card animate delay-3 bg-dark text-white">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">🧠 Machine Learning</h5>
+                        <p class="card-text">Python, AI, TensorFlow & Projects.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>
+
+<!-- Footer -->
+<footer class="text-center text-white bg-dark py-3">
+    <p>&copy; 2025 NKC-Tech Academy. All rights reserved. Call us 07080308505</p>
+</footer>
+
+<!-- Bootstrap Bundle JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

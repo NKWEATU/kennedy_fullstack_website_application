@@ -4,10 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RegistrationLoginSystemProjectApplication {
+public class RegistrationLoginSystemProjectApplication
+{
 
-	public static void main(String[] args) {
-		SpringApplication.run(RegistrationLoginSystemProjectApplication.class, args);
-	}
+public static void main(String[] args) {
+    SpringApplication.run(RegistrationLoginSystemProjectApplication.class, args);
+}
 
 }

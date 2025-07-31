@@ -11,65 +11,45 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-
 @Controller
 public class AuthController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public AuthController(UserService userService) {
         this.userService = userService;
     }
 
-    //handler method to handle home page request
+    // Home page
     @GetMapping("/index")
-    public String home(){
+    public String home() {
         return "index";
     }
 
-    //handler method to handle login request
-    @GetMapping("/login")
-    public String login(){
-        return "login";
-    }
-
-    //handler method to handle user registration form request
+    // Show registration form
     @GetMapping("/register")
-    public String showRegistrationForm(Model model){
-
-        //create model object to store form data
-        UserDto user = new UserDto();
-        model.addAttribute("user", user);
+    public String showRegistrationForm(Model model) {
+        model.addAttribute("user", new UserDto());
         return "register";
     }
 
-    //handler method to handle user registration form request
+    // Handle registration form submission
     @PostMapping("/register/save")
     public String registration(@Valid @ModelAttribute("user") UserDto userDto,
                                BindingResult result,
-                               Model model){
-        User existingUser = userService.findUserByEmail(userDto.getEmail());
+                               Model model) {
 
-        if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty() ){
-            result.rejectValue("email", null,
-                    "There is an account registered with this email");
+        User existingUser = userService.findUserByEmail(userDto.getEmail());
+        if (existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()) {
+            result.rejectValue("email", null, "There is an account registered with this email");
         }
 
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             model.addAttribute("user", userDto);
-            return "/register";
+            return "register";
         }
 
         userService.saveUser(userDto);
-        return"redirect:/register?success";
-    }
-
-    //handler method to handle list of users
-    @GetMapping("/users")
-    public String users(Model model){
-        List<UserDto> users = userService.findAllUsers();
-        model.addAttribute("users", users);
-        return "users";
+        return "redirect:/register?success";
     }
 }

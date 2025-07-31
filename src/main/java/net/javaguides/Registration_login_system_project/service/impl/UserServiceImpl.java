@@ -1,47 +1,30 @@
 package net.javaguides.Registration_login_system_project.service.impl;
 
 import net.javaguides.Registration_login_system_project.dto.UserDto;
-import net.javaguides.Registration_login_system_project.entity.Role;
 import net.javaguides.Registration_login_system_project.entity.User;
-import net.javaguides.Registration_login_system_project.repository.RoleRepository;
 import net.javaguides.Registration_login_system_project.repository.UserRepository;
 import net.javaguides.Registration_login_system_project.service.UserService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
-                           PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void saveUser(UserDto userDto) {
-
         User user = new User();
         user.setName(userDto.getFirstName() + " " + userDto.getLastName());
         user.setEmail(userDto.getEmail());
-
-        //encrypt the password using spring security
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-
-        Role role = roleRepository.findByName("ROLE_ADMIN");
-        if(role == null){
-            role = checkRoleExist();
-        }
-        user.setRoles(Arrays.asList(role));
+        user.setPhoneNumber(userDto.getPhoneNumber());
+        user.setCourseOfStudy(userDto.getCourseOfStudy());
         userRepository.save(user);
     }
 
@@ -54,23 +37,18 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> findAllUsers() {
         List<User> users = userRepository.findAll();
         return users.stream()
-                .map((user)-> mapToUserDto(user))
+                .map(this::mapToUserDto)
                 .collect(Collectors.toList());
     }
 
-    private UserDto mapToUserDto(User user){
-        UserDto userDto= new UserDto();
-        String[] str = user.getName().split(" ");
-        userDto.setFirstName(str[0]);
-        userDto.setLastName(str[1]);
+    private UserDto mapToUserDto(User user) {
+        UserDto userDto = new UserDto();
+        String[] names = user.getName().split(" ", 2);
+        userDto.setFirstName(names.length > 0 ? names[0] : "");
+        userDto.setLastName(names.length > 1 ? names[1] : "");
         userDto.setEmail(user.getEmail());
+        userDto.setPhoneNumber(user.getPhoneNumber());
+        userDto.setCourseOfStudy(user.getCourseOfStudy());
         return userDto;
-    }
-
-
-    private Role checkRoleExist(){
-        Role role = new Role();
-        role.setName("ROLE_ADMIN");
-        return roleRepository.save(role);
     }
 }
