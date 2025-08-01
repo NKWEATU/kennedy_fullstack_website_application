@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>NKC-Tech Academy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/style.css" />
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -56,6 +57,17 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        .courses {
+            background: url('/images/background.jpeg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .courses .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 15px;
+        }
     </style>
 </head>
 <body>
@@ -88,7 +100,7 @@
 </nav>
 
 <!-- Courses Section with Background -->
-<section class="courses py-5 text-white" id="courses" style="background: url('/images/background.jpeg') no-repeat center center/cover;">
+<section class="courses py-5 text-white" id="courses">
     <div class="container">
         <h2 class="text-center mb-4">Our Courses</h2>
         <div class="row g-4">
